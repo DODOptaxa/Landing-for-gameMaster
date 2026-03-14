@@ -13,6 +13,75 @@
   50%      { transform: translateY(-8px); }
 }
 
+/* ── LIFE GOAL BLOCK ── */
+.goalBlock {
+  background: linear-gradient(135deg, #fdf8f3 0%, #f5f0ea 100%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 0;
+}
+
+.goalMeta {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px;
+}
+
+.goalHorizon {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--accent);
+  white-space: nowrap;
+}
+
+.goalBarWrap {
+  flex: 1; height: 4px; background: var(--paper);
+  border-radius: 100px; overflow: hidden;
+}
+
+.goalBar {
+  height: 100%; background: var(--accent);
+  border-radius: 100px;
+  transition: width 0.8s ease;
+}
+
+.goalPct {
+  font-size: 10px; font-weight: 600; color: var(--accent);
+  white-space: nowrap;
+}
+
+.goalTitle {
+  font-size: 12px; font-weight: 400; color: var(--ink);
+  line-height: 1.55; font-style: italic;
+  margin-bottom: 10px;
+}
+
+.goalAreas {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+
+.goalArea {
+  font-size: 10px; font-weight: 500; padding: 2px 9px;
+  border-radius: 100px; background: white;
+  border: 1px solid var(--border); color: var(--muted);
+}
+
+/* ── DIVIDER ── */
+.stepDivider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 20px 0 20px;
+}
+
+.stepDividerLine {
+  flex: 1; height: 1px; background: var(--border);
+}
+
+.stepDividerLabel {
+  font-size: 10px; font-weight: 500; color: var(--muted);
+  letter-spacing: 0.4px; white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ── TODAY HEADER ── */
 .header {
   display: flex; align-items: flex-start; justify-content: space-between;
   margin-bottom: 28px;
@@ -20,6 +89,138 @@
 
 .headerTitle { font-size: 13px; font-weight: 500; color: var(--muted); letter-spacing: 0.5px; }
 .headerDate  { font-size: 12px; color: var(--stone); margin-top: 4px; }
+
+.todayScore {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+
+.scoreLabel {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.progressWrap {
+  position: relative; width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.progressRing { position: absolute; inset: 0; transform: rotate(-90deg); }
+
+.progressNum {
+  font-size: 10px; font-weight: 500; color: var(--accent);
+  position: relative; z-index: 1;
+}
+
+/* Steps */
+.steps { display: flex; flex-direction: column; gap: 0; }
+
+.step {
+  display: flex; gap: 16px; align-items: flex-start;
+  transition: opacity 0.3s;
+}
+
+.completing { opacity: 0.4; }
+
+.dotWrap {
+  display: flex; flex-direction: column; align-items: center;
+  width: 32px; flex-shrink: 0;
+}
+
+.dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500; flex-shrink: 0;
+  border: none; cursor: default; transition: all 0.2s;
+}
+
+.dot.done  { background: var(--green-pale); color: var(--green); }
+.dot.active {
+  background: var(--accent); color: white;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(193,123,63,0.4);
+  animation: ripple 2s ease-out infinite;
+}
+.dot.next  { background: var(--paper); color: var(--muted); }
+
+.dot.active:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(193,123,63,0.35);
+}
+
+@keyframes ripple {
+  0%   { box-shadow: 0 0 0 0 rgba(193,123,63,0.35); }
+  70%  { box-shadow: 0 0 0 10px rgba(193,123,63,0); }
+  100% { box-shadow: 0 0 0 0 rgba(193,123,63,0); }
+}
+
+.line {
+  width: 1px; flex: 1; min-height: 24px;
+  background: var(--paper);
+  margin: 4px 0;
+  transition: background 0.4s;
+}
+
+.lineDone { background: var(--green-pale); }
+
+.body { padding-bottom: 24px; flex: 1; }
+
+.label { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.desc  { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.5; }
+
+.tag {
+  display: inline-block; margin-top: 8px;
+  font-size: 11px; font-weight: 500; padding: 3px 10px;
+  border-radius: 100px;
+}
+.tag.health { background: var(--green-pale); color: var(--green); }
+.tag.work   { background: var(--accent-pale); color: var(--accent); }
+.tag.mind   { background: #eef0f8; color: #5a6abf; }
+
+.completeBtn {
+  display: block; margin-top: 10px;
+  font-size: 12px; font-weight: 500; color: var(--accent);
+  background: var(--accent-pale);
+  border: 1px solid var(--accent-light);
+  border-radius: 100px; padding: 5px 14px;
+  cursor: pointer; transition: all 0.2s;
+}
+
+.completeBtn:hover {
+  background: var(--accent); color: white;
+  transform: translateY(-1px);
+}
+
+/* Advice */
+.advice {
+  margin-top: 24px; background: var(--accent-pale);
+  border-radius: 14px; padding: 16px 18px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+
+.adviceIcon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); display: flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; font-family: var(--font-display);
+  font-style: italic; font-size: 14px; color: white;
+}
+
+.adviceText {
+  font-size: 12px; font-weight: 300;
+  color: var(--ink2); line-height: 1.6;
+}
+
+.adviceText strong { font-weight: 500; color: var(--ink); }
+
+.adviceMsg {
+  display: inline;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
 .progressWrap {
   position: relative; width: 40px; height: 40px;

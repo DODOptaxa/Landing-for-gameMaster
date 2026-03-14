@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import s from './PathCard.module.css'
 
+const LIFE_GOAL = {
+  title: 'Be fully present for the people I love, while building work that matters',
+  horizon: '5-year vision',
+  areas: ['Health', 'Family', 'Work'],
+  progress: 34, // overall life progress %
+}
+
 const STEPS = [
   { id: 1, label: 'Morning meditation', desc: '10 minutes — done at 7:42 am', tag: 'Mind', tagClass: 'mind', status: 'done' },
   { id: 2, label: '5 km run', desc: 'Completed. New weekly record.', tag: 'Health', tagClass: 'health', status: 'done' },
@@ -24,9 +31,9 @@ export default function PathCard() {
     setCompleting(id)
     setTimeout(() => {
       setSteps(prev => {
-        const updated = prev.map(s => s.id === id ? { ...s, status: 'done' } : s)
-        const nextActive = updated.find(s => s.status === 'next')
-        if (nextActive) return updated.map(s => s.id === nextActive.id ? { ...s, status: 'active' } : s)
+        const updated = prev.map(st => st.id === id ? { ...st, status: 'done' } : st)
+        const nextActive = updated.find(st => st.status === 'next')
+        if (nextActive) return updated.map(st => st.id === nextActive.id ? { ...st, status: 'active' } : st)
         return updated
       })
       setCompleting(null)
@@ -34,29 +41,62 @@ export default function PathCard() {
     }, 400)
   }
 
-  const doneCount = steps.filter(s => s.status === 'done').length
-  const progress = Math.round((doneCount / steps.length) * 100)
+  const doneCount = steps.filter(st => st.status === 'done').length
+  const todayProgress = Math.round((doneCount / steps.length) * 100)
+
+  // score label based on today's progress
+  const scoreLabel = todayProgress >= 75 ? '🔥 Strong day' : todayProgress >= 50 ? '✦ On track' : '◎ In progress'
+  const scoreColor = todayProgress >= 75 ? 'var(--green)' : todayProgress >= 50 ? 'var(--accent)' : 'var(--muted)'
 
   return (
     <div className={s.card}>
+
+      {/* ── LIFE GOAL ── */}
+      <div className={s.goalBlock}>
+        <div className={s.goalMeta}>
+          <span className={s.goalHorizon}>{LIFE_GOAL.horizon}</span>
+          <div className={s.goalBarWrap}>
+            <div className={s.goalBar} style={{ width: `${LIFE_GOAL.progress}%` }} />
+          </div>
+          <span className={s.goalPct}>{LIFE_GOAL.progress}%</span>
+        </div>
+        <div className={s.goalTitle}>"{LIFE_GOAL.title}"</div>
+        <div className={s.goalAreas}>
+          {LIFE_GOAL.areas.map(a => (
+            <span key={a} className={s.goalArea}>{a}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* ── DIVIDER: today is a step toward the goal ── */}
+      <div className={s.stepDivider}>
+        <div className={s.stepDividerLine} />
+        <span className={s.stepDividerLabel}>Today's step toward it</span>
+        <div className={s.stepDividerLine} />
+      </div>
+
+      {/* ── TODAY HEADER ── */}
       <div className={s.header}>
         <div>
           <div className={s.headerTitle}>Your path today</div>
           <div className={s.headerDate}>Friday, March 14</div>
         </div>
-        <div className={s.progressWrap}>
-          <svg className={s.progressRing} viewBox="0 0 40 40">
-            <circle cx="20" cy="20" r="16" fill="none" stroke="var(--paper)" strokeWidth="3"/>
-            <circle
-              cx="20" cy="20" r="16" fill="none"
-              stroke="var(--accent)" strokeWidth="3"
-              strokeDasharray={`${progress} 100`}
-              strokeDashoffset="25"
-              strokeLinecap="round"
-              style={{ transition: 'stroke-dasharray 0.5s ease' }}
-            />
-          </svg>
-          <span className={s.progressNum}>{progress}%</span>
+        <div className={s.todayScore}>
+          <div className={s.progressWrap}>
+            <svg className={s.progressRing} viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--paper)" strokeWidth="3"/>
+              <circle
+                cx="20" cy="20" r="16" fill="none"
+                stroke="var(--accent)" strokeWidth="3"
+                strokeDasharray={`${todayProgress} 100`}
+                strokeDashoffset="25"
+                strokeLinecap="round"
+                style={{ transition: 'stroke-dasharray 0.5s ease' }}
+              />
+            </svg>
+            <span className={s.progressNum}>{todayProgress}%</span>
+          </div>
+          <span className={s.scoreLabel} style={{ color: scoreColor }}>{scoreLabel}</span>
         </div>
       </div>
 

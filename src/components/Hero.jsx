@@ -7,8 +7,8 @@ export default function Hero() {
       <div className={s.left}>
         <div className={s.eyebrow}>Your personal AI companion</div>
         <h1 className={s.title}>
-          Your path —<br />
-          <em>in one place.</em>
+          Nothing stucks<br />
+          <em>Everything goes.</em>
         </h1>
         <p className={s.sub}>
           everything watches over your life — health, work, relationships, goals —
