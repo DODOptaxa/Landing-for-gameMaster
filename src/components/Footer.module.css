@@ -1,0 +1,44 @@
+.footer {
+  background: var(--warm);
+  padding: 56px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 40px;
+}
+
+.brand { }
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 26px; letter-spacing: -1px; color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.logo em { font-style: italic; color: var(--accent); }
+
+.tagline {
+  font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7;
+}
+
+.col { display: flex; flex-direction: column; gap: 10px; }
+
+.colTitle {
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.col a {
+  font-size: 13px; font-weight: 300; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+
+.col a:hover { color: var(--ink); }
+
+.bottom {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  font-size: 12px; color: var(--stone); font-weight: 300;
+}

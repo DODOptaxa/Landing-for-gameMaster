@@ -1,0 +1,48 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #faf7f2;
+  --warm: #f3ede3;
+  --paper: #ede7db;
+  --stone: #c9bfaf;
+  --muted: #9a9080;
+  --ink: #2a2520;
+  --ink2: #4a4540;
+  --accent: #c17b3f;
+  --accent-light: #e8c49a;
+  --accent-pale: #f5ead8;
+  --green: #4a7c59;
+  --green-pale: #e8f0eb;
+  --border: rgba(42,37,32,0.1);
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+}
+
+body { overflow-x: hidden; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
